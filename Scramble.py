@@ -5,19 +5,6 @@ import datetime
 import words
 import json
 
-"""
-Guess the Word Game:
-
--Displays scrambled word. - [DONE]
--Only have 3 chances to guess word. - [DONE]
--Add points to score if guess is correct. - [DONE]
-    Extra points if word is guessed on first try. - [DONE]
-    Reduce points if user unable to guess the word after 3 attempts. - [DONE]   
--Add ability to shuffle letters. [DONE]
-    Set a limit to how many times a word can be shuffled to (3) per attempt. [DONE]
--Add High-Score list which saves/formatted to json(?) file [DONE]
-    Show Top scores in menu [WIP]
-"""
 
 words = words.words
 
@@ -75,12 +62,17 @@ def shuff(word: list):  # Handles word shuffle
 
 def menu():  # Handles menu choice 1/2 player
     try:
+        with open('high_scores.json', 'r') as rhs:
+            scores = rhs.read()
+            rhs.close()
+
         while True:
-            print(f"Welcome to The Word Challenge!",
+            print(f"Welcome to SCRAMBLDE!",
                   f"\nSelect an option:",
                   f"\n\t[1] Single Player",
-                  f"\n\t[2] Versus Mode - Work in Progress...",
-                  f"\nIf you would like to save/quit the game; Enter 'exit' or 'quit' for a guess..."
+                  f"\n\t[2] Versus Mode - (Work in Progress...)",
+                  f"\n{scores}"
+                  f"\nIf you would like to save your score & quit; Enter 'exit' or 'quit' for a guess..."
                   )
 
             gtype = input(f"Choice: ")
@@ -91,10 +83,9 @@ def menu():  # Handles menu choice 1/2 player
                 break
 
             elif gtype == str(2):
-                print("Still a work in progress...")
+                print("Still a work in progress...\nCheck Back Later.")
                 time.sleep(1.5)
                 os.system('cls')
-
 
             else:
                 print("You must choose an option...")
